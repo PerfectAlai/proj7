@@ -1,18 +1,18 @@
 function Calculate() {
-  const costPrice = parseFloat(document.getElementById("costPrice").value);
-  const sellingPrice = parseFloat(document.getElementById("sellingPrice").value);
+  let costPrice = document.querySelector(".costPrice").value;
+  let sellingPrice = document.querySelector(".sellingPrice").value;
 
-  const profitorLoss = document.querySelector(".profitLoss");
+  const profitOrLoss = document.querySelector(".profitLoss");
   const profitLossPercentage = document.querySelector(".profitLossPercentage");
   const nothing = document.querySelector(".nothing");
 
-  profitorLoss.innerHTML = `GH¢ 0.00`
-  profitLossPercentage = `%`
-  nothing.innerHTML = ""
+  profitOrLoss.innerHTML = `GH¢ 0.00`;
+  profitLossPercentage.innerHTML = `%`;
+  nothing.innerHTML = "";
 
   if (costPrice === "" || sellingPrice === "") {
-    profitorLoss.innerHTML = `GH¢ 0.00`
-    profitLossPercentage = `%`
+    profitOrLoss.innerHTML = `GH¢ 0.00`;
+    profitLossPercentage.innerHTML = `%`;
     alert("Please fill in all fields");
     //nothing.innerHTML = "Please fill in all fields"
   }
@@ -20,7 +20,34 @@ function Calculate() {
   if (sellingPrice > costPrice) {
     const profit = sellingPrice - costPrice;
     const profitPercentage = (profit / costPrice) * 100;
-    profitorLoss.innerHTML = `GH¢ ${profit.toFixed(2)}`;
-    profitLossPercentage.innerHTML = `${profitPercentage.toFixed(2)}%`;
+    profitOrLoss.innerHTML = ` Your profit is GH¢ ${profit.toFixed(2)}`;
+    profitLossPercentage.innerHTML = `The profit percentage is: ${profitPercentage.toFixed(2)}%`;
   }
+
+  if (costPrice > sellingPrice) {
+    const loss = costPrice - sellingPrice;
+    const lossPercentage = ((loss / costPrice) * 100).toFixed(2);
+    profitOrLoss.innerHTML = ` Your loss is GH¢ -${loss.toFixed(2)}`;
+    profitLossPercentage.innerHTML = `The loss percentage is : % ${lossPercentage}%`;
+  }
+
+  if (costPrice === sellingPrice) {
+    profitOrLoss.innerHTML = `GH¢ 0.00`;
+    profitLossPercentage.innerHTML = `You made 0% profit and loss`;
+    nothing.innerHTML = "You have broken even"
+  }
+}
+
+function clearField() {
+    let costPrice = document.querySelector(".costPrice").value;
+    let sellingPrice = document.querySelector(".sellingPrice").value;
+    let profitOrLoss = document.querySelector(".profitLoss");
+    let profitLossPercentage = document.querySelector(".profitLossPercentage");
+    let nothing = document.querySelector(".nothing");
+    costPrice.value = "";
+    sellingPrice.value = "";
+    profitOrLoss.innerHTML = `GH¢ 0.00`;
+    profitLossPercentage.innerHTML = `%`;
+    nothing.innerHTML = "";
+  
 }
